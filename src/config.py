@@ -5,7 +5,6 @@ from dotenv import load_dotenv
 load_dotenv()
 
 class Config:
-    '''Application configuration.'''
     
     # Server Configuration
     HOST = os.getenv('HOST', '0.0.0.0')
@@ -13,7 +12,7 @@ class Config:
     DEBUG = os.getenv('DEBUG', 'False').lower() == 'true'
     
     # Plugin Configuration
-    REFRESH_INTERVAL = int(os.getenv('REFRESH_INTERVAL', '900'))
+    REFRESH_INTERVAL = int(os.getenv('REFRESH_INTERVAL', '3600'))  # Default 1 hour
     
     # TRMNL Configuration
     TRMNL_API_KEY = os.getenv('TRMNL_API_KEY')
@@ -24,11 +23,10 @@ class Config:
     DISPLAY_HEIGHT = int(os.getenv('DISPLAY_HEIGHT', '480'))
     
     # Cache Configuration
-    CACHE_TIMEOUT = int(os.getenv('CACHE_TIMEOUT', '600'))
+    CACHE_TIMEOUT = int(os.getenv('CACHE_TIMEOUT', '3600'))  # Cache timeout matches refresh
     
     @classmethod
     def validate(cls):
-        '''Validate required configuration.'''
         required_keys = [
             'TRMNL_API_KEY',
             'TRMNL_PLUGIN_UUID'
